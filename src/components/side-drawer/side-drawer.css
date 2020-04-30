@@ -1,0 +1,25 @@
+aside  {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 30rem;
+    max-width: 80%;
+    height: 100vh;
+    background: #f3f3f3;
+    box-shadow: 0 2px 8px #faf9f9;
+    transition: left 0.3s ease-out;
+}
+
+:host([open]) aside {
+    left: 0;
+}
+
+header {
+    padding: 1rem;
+    background: #55c57a;
+}
+
+header h1{
+    font-size: 1.5rem;
+    color: #fff
+}
