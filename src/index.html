@@ -29,7 +29,7 @@
 
 </head>
 <body>
-
+  <button class='js-open-drawer'>Open</button>
   <wc-side-drawer title="Main Menu">
     <nav class='side-nav'>
       <ul>
@@ -40,5 +40,14 @@
     </nav>
   </wc-side-drawer>
 
+  <script>
+    let sideDrawerButton = document.querySelector('.js-open-drawer');
+    let sideDrawer = document.querySelector('wc-side-drawer');
+    sideDrawerButton.addEventListener('click', () => {
+      if (!sideDrawer.open) {
+        sideDrawer.open = true;
+      } 
+    })
+</script>
 </body>
 </html>

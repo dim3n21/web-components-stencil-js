@@ -17,9 +17,25 @@ aside  {
 header {
     padding: 1rem;
     background: #55c57a;
+    position: relative;
 }
 
 header h1{
     font-size: 1.5rem;
     color: #fff
+}
+
+.js-close-drawer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
+    color: #fff;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.js-close-drawer:focus {
+    outline: none;
 }
