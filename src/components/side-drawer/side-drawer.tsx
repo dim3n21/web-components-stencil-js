@@ -1,4 +1,4 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Prop, State, h } from '@stencil/core';
 
 @Component ({
     tag: 'wc-side-drawer',
@@ -7,6 +7,7 @@ import { Component, Prop, h } from '@stencil/core';
 })
 
 export class SideDrawer {
+    @State() showContactInfo = false;
     @Prop({reflect: true}) title: string;
     @Prop({reflect: true, mutable: true}) open: boolean;
 
@@ -14,13 +15,39 @@ export class SideDrawer {
         this.open = false;
     }
 
+    onContentChange(content: string) {
+        this.showContactInfo = content === 'contact';
+      }
+
     render() {
+        let mainContent = <slot />;
+        if (this.showContactInfo) {
+            mainContent = (
+                <div class="contact-information js-contact-information">
+                  <h2>Contact Information</h2>
+                  <p>You can reach us via phone or email.</p>
+                  <ul>
+                    <li>Phone: 49802384032</li>
+                    <li>
+                      E-Mail:
+                      <a href="mailto:something@something.com">
+                        something@something.com
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              );
+        }
         return (
             <aside>
                 <header><h1>{this.title}</h1></header>
                 <button class='js-close-drawer' onClick={this.onCloseDrawer.bind(this)}>x</button>
+                <section class='js-tabs tabs'>
+                    <button class={!this.showContactInfo ? 'active' : ''} onClick={this.onContentChange.bind(this, 'nav')}>Navigation</button>
+                    <button class={this.showContactInfo ? 'active' : ''} onClick={this.onContentChange.bind(this, 'contact')}>Contact</button>
+                </section>
                 <main>
-                    <slot />
+                    {mainContent}
                 </main>
             </aside>
         )

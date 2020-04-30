@@ -39,3 +39,37 @@ header h1{
 .js-close-drawer:focus {
     outline: none;
 }
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.tabs button {
+    width: 30%;
+    background: #fff;
+    color: #28b485;
+    text-align: center;
+    border: 1px solid #28b485;
+    font: inherit;
+    padding: 0.25rem 0;
+    cursor: pointer;
+}
+
+.tabs button.active,
+.tabs button:hover,
+.tabs button:active {
+    background: #28b485;
+    color: #fff;
+}
+
+.tabs button:focus {
+    outline: none;
+}
+
+.contact-information {
+    padding: 0 1rem;
+    color: #28b485;
+}
