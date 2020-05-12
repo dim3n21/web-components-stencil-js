@@ -1,4 +1,4 @@
-import { Component, State, Element, h } from '@stencil/core';
+import { Component, State, Element, h, Prop } from '@stencil/core';
 
 @Component({
   tag: 'wc-stock-price',
@@ -15,6 +15,8 @@ export class StockPrice {
   @State() stockInputValid = false;
   @State() error: string;
 
+  @Prop() stockSymbol: string;
+
   onUserInput(event: Event) {
     this.stockUserInput = (event.target as HTMLInputElement).value;
     if (this.stockUserInput.trim() !== '') {
@@ -28,6 +30,34 @@ export class StockPrice {
     event.preventDefault();
     // const stockSymbol = (this.el.shadowRoot.querySelector('#stock-symbol') as HTMLInputElement).value;
     const stockSymbol = this.stockInput.value;
+    this.fetchStockPrice(stockSymbol);
+  }
+
+  componentWillLoad() {
+    console.log('componentWillLoad');
+    console.log(this.stockSymbol);
+  }
+
+  componentDidLoad() {
+    console.log('componentDidLoad');
+    if (this.stockSymbol) {
+      this.fetchStockPrice(this.stockSymbol);
+    }
+  }
+
+  componentWillUpdate() {
+    console.log('componentWillUpdate');
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+  }
+
+  componentDidUnload() {
+    console.log('componentDidUnload');
+  }
+
+  fetchStockPrice(stockSymbol: string) {
     fetch(
       `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stockSymbol}&apikey=demo`
     )
