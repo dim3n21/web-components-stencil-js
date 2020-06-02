@@ -25,6 +25,8 @@ export namespace Components {
         "opened": boolean;
         "title": string;
     }
+    interface WcSpinner {
+    }
     interface WcStockFinder {
     }
     interface WcStockPrice {
@@ -44,6 +46,12 @@ declare global {
         prototype: HTMLWcSideDrawerElement;
         new (): HTMLWcSideDrawerElement;
     };
+    interface HTMLWcSpinnerElement extends Components.WcSpinner, HTMLStencilElement {
+    }
+    var HTMLWcSpinnerElement: {
+        prototype: HTMLWcSpinnerElement;
+        new (): HTMLWcSpinnerElement;
+    };
     interface HTMLWcStockFinderElement extends Components.WcStockFinder, HTMLStencilElement {
     }
     var HTMLWcStockFinderElement: {
@@ -59,6 +67,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "my-component": HTMLMyComponentElement;
         "wc-side-drawer": HTMLWcSideDrawerElement;
+        "wc-spinner": HTMLWcSpinnerElement;
         "wc-stock-finder": HTMLWcStockFinderElement;
         "wc-stock-price": HTMLWcStockPriceElement;
     }
@@ -82,6 +91,8 @@ declare namespace LocalJSX {
         "opened"?: boolean;
         "title"?: string;
     }
+    interface WcSpinner {
+    }
     interface WcStockFinder {
         "onUcSymbolSelected"?: (event: CustomEvent<string>) => void;
     }
@@ -91,6 +102,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "my-component": MyComponent;
         "wc-side-drawer": WcSideDrawer;
+        "wc-spinner": WcSpinner;
         "wc-stock-finder": WcStockFinder;
         "wc-stock-price": WcStockPrice;
     }
@@ -101,6 +113,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "wc-side-drawer": LocalJSX.WcSideDrawer & JSXBase.HTMLAttributes<HTMLWcSideDrawerElement>;
+            "wc-spinner": LocalJSX.WcSpinner & JSXBase.HTMLAttributes<HTMLWcSpinnerElement>;
             "wc-stock-finder": LocalJSX.WcStockFinder & JSXBase.HTMLAttributes<HTMLWcStockFinderElement>;
             "wc-stock-price": LocalJSX.WcStockPrice & JSXBase.HTMLAttributes<HTMLWcStockPriceElement>;
         }

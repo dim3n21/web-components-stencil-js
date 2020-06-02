@@ -51,7 +51,7 @@ export class StockFinder {
       </ul>
     );
     if (this.loading) {
-      content = <uc-spinner />;
+      content = <wc-spinner />;
     }
     return [
       <form onSubmit={this.onFindStocks.bind(this)}>

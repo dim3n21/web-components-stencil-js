@@ -116,6 +116,9 @@ export class StockPrice {
     if (this.fetchedPrice) {
       dataContent = <p>Price: ${this.fetchedPrice}</p>;
     }
+    if (this.loading) {
+      dataContent = <uc-spinner></uc-spinner>;
+    }
     return [
       <form onSubmit={this.onFetchStockPrice.bind(this)}>
         <input
