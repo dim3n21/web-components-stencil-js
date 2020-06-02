@@ -1,4 +1,4 @@
-import { Component, State, Element, h, Prop } from '@stencil/core';
+import { Component, State, Element, h, Prop, Watch } from '@stencil/core';
 
 @Component({
   tag: 'wc-stock-price',
@@ -17,6 +17,15 @@ export class StockPrice {
 
   @Prop() stockSymbol: string;
 
+  @Watch('stockSymbol')
+  stockSymbolChanged(newValue: string, oldValue: string) {
+    if (newValue !== oldValue) {
+      this.stockUserInput = newValue;
+      this.stockInputValid = true;
+      this.fetchStockPrice(newValue);
+    }
+  }
+
   onUserInput(event: Event) {
     this.stockUserInput = (event.target as HTMLInputElement).value;
     if (this.stockUserInput.trim() !== '') {
@@ -29,8 +38,8 @@ export class StockPrice {
   onFetchStockPrice(event: Event) {
     event.preventDefault();
     // const stockSymbol = (this.el.shadowRoot.querySelector('#stock-symbol') as HTMLInputElement).value;
-    const stockSymbol = this.stockInput.value;
-    this.fetchStockPrice(stockSymbol);
+    this.stockSymbol = this.stockInput.value;
+    // this.fetchStockPrice(stockSymbol);
   }
 
   componentWillLoad() {
@@ -41,6 +50,8 @@ export class StockPrice {
   componentDidLoad() {
     console.log('componentDidLoad');
     if (this.stockSymbol) {
+      this.stockUserInput = this.stockSymbol;
+      this.stockInputValid = true;
       this.fetchStockPrice(this.stockSymbol);
     }
   }
