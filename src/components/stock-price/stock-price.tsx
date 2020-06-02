@@ -14,6 +14,7 @@ export class StockPrice {
   @State() stockUserInput: string;
   @State() stockInputValid = false;
   @State() error: string;
+  @State() loading = false;
 
   @Prop() stockSymbol: string;
 
@@ -78,6 +79,7 @@ export class StockPrice {
 
 
   fetchStockPrice(stockSymbol: string) {
+    this.loading = true;
     fetch(
       `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stockSymbol}&apikey=demo`
     )
@@ -93,10 +95,17 @@ export class StockPrice {
         }
         this.error = null;
         this.fetchedPrice = +parsedRes['Global Quote']['05. price'];
+        this.loading = false;
       })
       .catch(err => {
         this.error = err.message;
+        this.fetchedPrice = null;
+        this.loading = false;
       });
+  }
+
+  hostData() {
+    return { class: this.error ? 'error' : '' };
   }
 
   render() {
