@@ -1,4 +1,4 @@
-import { Component, State, Element, h, Prop, Watch } from '@stencil/core';
+import { Component, State, Element, h, Prop, Watch, Listen } from '@stencil/core';
 
 @Component({
   tag: 'wc-stock-price',
@@ -67,6 +67,15 @@ export class StockPrice {
   componentDidUnload() {
     console.log('componentDidUnload');
   }
+
+  @Listen('body:wcSymbolSelected')
+  onStockSymbolSelected(event: CustomEvent) {
+    console.log('stock symbol selected: ' + event.detail);
+    if (event.detail && event.detail !== this.stockSymbol) {
+      this.stockSymbol = event.detail;
+    }
+  }
+
 
   fetchStockPrice(stockSymbol: string) {
     fetch(
